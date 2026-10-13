@@ -32,6 +32,9 @@ Create the following files for your submission:
 - `bug_explanations.txt` - Brief explanations of what caused each bug
 - Your fixed version of **one** of the three Python game files
 
+Upload your completed files directly to Moodle:
+👉 [Moodle Assignment 2 Submission Point](https://moodle.ucl.ac.uk/course/view.php?id=60820)
+
 ## Game Controls
 
 - **SPACE**: Drop bomb
@@ -45,7 +48,7 @@ Create the following files for your submission:
 2. Write detailed bug reports for each bug
 3. Identify the root causes
 4. Fix the bugs in **one** of the three versions
-5. Push your solution files to this repository
+5. Upload your solution files directly to Moodle before the deadline
 
 ## Deadline
 
