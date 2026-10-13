@@ -27,13 +27,10 @@ All three games should behave identically but contain **at least five bugs** tha
 
 ## Submission Guidelines
 
-Create the following files for your submission:
-- `bug_reports.txt` - Your detailed bug reports
-- `bug_explanations.txt` - Brief explanations of what caused each bug
-- Your fixed version of **one** of the three Python game files
+Please submit your bug reports as one file (txt or PDF) and your fixed python source code as a second file.  No need to zip them, multiple files can be uploaded.
 
 Upload your completed files directly to Moodle:
-👉 [Moodle Assignment 2 Submission Point](https://moodle.ucl.ac.uk/course/view.php?id=60820)
+👉 [Moodle Assignment 2 Submission Point](https://moodle.ucl.ac.uk/mod/assign/view.php?id=9108700)
 
 ## Game Controls
 
