@@ -4,16 +4,13 @@ Welcome to your debugging assignment! This repository contains three implementat
 
 ## Quick Start
 
-1. Clone this repository to your local machine
-2. Run the setup script for your platform:
-   - **macOS/Linux:** `./setup.sh`
-   - **Windows:** `setup.bat`
-3. Test one of the games: `python bomber_oo.py`
-4. Read the full assignment instructions in `assignment2.pdf`
+1. Clone or download this repository to your local machine
+2. Test one of the games: `python3 bomber_oo.py`
+3. Read the full assignment instructions in `assignment2.pdf`
 
 ## Prerequisites
 
-- Python 3.13 or newer
+- Python 3
 - tkinter (usually included with Python)
 
 ## Game Files
@@ -53,12 +50,6 @@ Tuesday 20th October at 12 noon (midday)
 
 ## Troubleshooting
 
-### Setup Issues
-If the automatic setup doesn't work:
-1. Ensure Python 3.13+ is installed: `python --version`
-2. Create virtual environment manually: `python3 -m venv bomber_env`
-3. Activate it: `source bomber_env/bin/activate` (macOS/Linux) or `bomber_env\Scripts\activate.bat` (Windows)
-
 ### tkinter Issues
 If you get tkinter import errors:
 - **Ubuntu/Debian:** `sudo apt-get install python3-tk`
@@ -66,5 +57,5 @@ If you get tkinter import errors:
 - **Arch Linux:** `sudo pacman -S tk`
 - **macOS/Windows:** tkinter should be included with Python
 
-### Game Won't Run
-Test tkinter availability: `python -c "import tkinter; print('tkinter works!')"`
+### Testing tkinter
+Test tkinter availability: `python3 -c "import tkinter; print('tkinter works!')"`
