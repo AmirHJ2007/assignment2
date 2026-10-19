@@ -71,6 +71,8 @@ class Building():
 
     ''' is_inside tests if a point is inside the building '''
     def is_inside(self, point):
+        if self.height <= 0:
+            return False
         if point.X < self.x or point.X > self.x + self.width or point.Y < CANVAS_HEIGHT-self.height:
             return False
         return True
@@ -79,7 +81,7 @@ class Building():
     def shrink(self):
         self.height = self.height - 50
         self.canvas.delete(self.main_rect)
-        if self.height >= 0:
+        if self.height > 0:
             self.main_rect = self.canvas.create_rectangle(self.x, CANVAS_HEIGHT, self.x + self.width, CANVAS_HEIGHT-self.height, fill="brown")
 
     def cleanup(self):
