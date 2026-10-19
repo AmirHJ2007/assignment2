@@ -77,9 +77,9 @@ class Building():
 
     ''' shrink the building when a bomb drops on it '''
     def shrink(self):
-        self.height = self.height - 50
+        self.height = self.height - 700
         self.canvas.delete(self.main_rect)
-        if self.height > 0:
+        if self.height >= 0:
             self.main_rect = self.canvas.create_rectangle(self.x, CANVAS_HEIGHT, self.x + self.width, CANVAS_HEIGHT-self.height, fill="brown")
 
     def cleanup(self):
