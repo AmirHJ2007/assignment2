@@ -79,7 +79,8 @@ class Building():
     def shrink(self):
         self.height = self.height - 50
         self.canvas.delete(self.main_rect)
-        self.main_rect = self.canvas.create_rectangle(self.x, CANVAS_HEIGHT, self.x + self.width, CANVAS_HEIGHT-self.height, fill="brown")
+        if self.height > 0:
+            self.main_rect = self.canvas.create_rectangle(self.x, CANVAS_HEIGHT, self.x + self.width, CANVAS_HEIGHT-self.height, fill="brown")
 
     def cleanup(self):
         self.canvas.delete(self.main_rect)
@@ -141,7 +142,7 @@ class Plane():
         self.wing1_points = [40,28, 76,28, 94,48, 80,48]
         self.wing2_points = [52,16, 78,8, 94,8, 81,16]
         self.tail_points = [90,16, 110,0, 124,0, 116,16]
-        self.width = 124 # plane width
+        self.width = 40 # plane width
         self.draw()
 
     ''' reset the plane to its starting position at the start of a new level '''
@@ -210,10 +211,10 @@ class Display(Frame):
         self.score = 0
         self.level = 1
         self.score_text = self.canvas.create_text(5, 5, anchor="nw")
-        self.canvas.itemconfig(self.score_text, text="Score:", font=self.scorefont)
+        self.canvas.itemconfig(self.score_text, text="Score:", font=self.scorefont, fill="black")
 
     def display_score(self):
-        self.canvas.itemconfig(self.score_text, text="Level: " + str(self.level) + "  Score: " + str(self.score), font=self.scorefont)
+        self.canvas.itemconfig(self.score_text, text="Level: " + str(self.level) + "  Score: " + str(self.score), font=self.scorefont, fill="black")
 
     ''' create new buildings at the start of a level '''
     def create_buildings(self):
@@ -225,8 +226,11 @@ class Display(Frame):
         #create the new ones
         for building_num in range(0, 1200//SPACING):
             height = self.rand.randint(10,500) #random number between 10 and 500
-            self.buildings.append(Building(self.canvas, building_num, height,
-                                           self.building_width))
+            new_building = Building(self.canvas, building_num, height, self.building_width)
+            if new_building.x + self.building_width < CANVAS_WIDTH:
+                self.buildings.append(new_building)
+            else:
+                new_building.cleanup()
 
     def drop_bomb(self):
         self.bomb.drop(self.plane.position)
@@ -234,6 +238,10 @@ class Display(Frame):
     ''' check the state of the bomb each frame '''
     def check_bomb(self):
         if not self.bomb.falling:
+            return
+        # did the bomb hit the floor?
+        if self.bomb.position.getY() > CANVAS_HEIGHT:
+            self.bomb.explode()
             return
         # did the bomb hit a building?
         for building in self.buildings:
@@ -256,7 +264,7 @@ class Display(Frame):
                 or building.is_inside(plane_body_bottom)
                 or building.is_inside(plane_wing)):
                 self.game_over()
-        if plane_body_bottom.getY() == CANVAS_HEIGHT and plane_body_bottom.getX() < 20:
+        if plane_body_bottom.getY() >= CANVAS_HEIGHT and plane_body_bottom.getX() < 20:
             self.plane_landed()
 
     ''' game_over is called when the plane crashes to stop play and display the 
@@ -264,8 +272,8 @@ class Display(Frame):
     def game_over(self):
         self.game_running = False
         self.won = False
-        self.text = self.canvas.create_text(CANVAS_WIDTH/2, CANVAS_HEIGHT/2, anchor="c")
-        self.canvas.itemconfig(self.text, text="GAME OVER!", font=self.bigfont)
+        self.text = self.canvas.create_text(CANVAS_WIDTH/2, CANVAS_HEIGHT/2, anchor="c", fill="red")
+        self.canvas.itemconfig(self.text, text="GAME OVER!", font=self.bigfont, fill="red")
 
     ''' plane_landed is called when the plane has landed to stop plane and
         display the success message '''
@@ -275,9 +283,9 @@ class Display(Frame):
         self.score = self.score + 1000
         self.display_score()
         self.text = self.canvas.create_text(CANVAS_WIDTH/2, CANVAS_HEIGHT/2, anchor="c")
-        self.canvas.itemconfig(self.text, text="SUCCESS!", font=self.bigfont)
+        self.canvas.itemconfig(self.text, text="SUCCESS!", font=self.bigfont, fill="green")
         self.text2 = self.canvas.create_text(CANVAS_WIDTH/2, CANVAS_HEIGHT/2 + 100, anchor="c")
-        self.canvas.itemconfig(self.text2, text="Press n for next level.", font=self.scorefont)
+        self.canvas.itemconfig(self.text2, text="Press n for next level.", font=self.scorefont, fill="green")
 
     ''' restart is called after game over to start a new game '''
     def restart(self):
