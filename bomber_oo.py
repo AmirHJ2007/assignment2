@@ -142,7 +142,7 @@ class Plane():
         self.wing1_points = [40,28, 76,28, 94,48, 80,48]
         self.wing2_points = [52,16, 78,8, 94,8, 81,16]
         self.tail_points = [90,16, 110,0, 124,0, 116,16]
-        self.width = 40 # plane width
+        self.width = 125 # plane width
         self.draw()
 
     ''' reset the plane to its starting position at the start of a new level '''
@@ -170,7 +170,7 @@ class Plane():
     def move(self):
         self.position.move(-4 * speed, 0)
         if self.position.getX() < -self.width:
-            self.position.move(CANVAS_WIDTH, 40)
+            self.position.move(CANVAS_WIDTH + self.width, 40)
             #ensure we don't go off the bottom of the screen
             if self.position.getY() > CANVAS_HEIGHT:
                 self.position.Y = CANVAS_HEIGHT
